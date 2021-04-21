@@ -1,6 +1,8 @@
 import StackGrid from "react-stack-grid";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
-export default function RightHome({ gamesData }) {
+export default function RightHome({ gamesData, page }) {
   var listOfPlatFormSvg = [
     <svg
       class="h-3 w-3 "
@@ -52,6 +54,8 @@ export default function RightHome({ gamesData }) {
     </svg>,
   ];
 
+  const router = useRouter();
+
   const onMouseHover = (index) => {
     if (document.getElementById(`${index + 1}`).classList.contains("hidden")) {
       document.getElementById(`${index + 1}`).classList.remove("hidden");
@@ -97,7 +101,7 @@ export default function RightHome({ gamesData }) {
         </span>
       </div>
       <StackGrid className="mt-3" columnWidth={"25%"} gutterHeight={10}>
-        {gamesData["data"]["results"].map((games, index) => {
+        {gamesData["results"].map((games, index) => {
           {
             /* console.log(index); */
           }
@@ -245,8 +249,25 @@ export default function RightHome({ gamesData }) {
           );
         })}
       </StackGrid>
-      <div className="mt-5 mb-3 flex text-white items-center justify-center w-[fit-content] p-1 px-3 self-center rounded-sm border-white border hover:bg-white hover:text-black transition duration-300 cursor-pointer">
-        <p>Page 2</p>
+      <div className="flex items-center ">
+        {page <= 1 ? (
+          <div />
+        ) : (
+          <div className="mr-2 mt-5 mb-3 flex text-white items-center justify-center w-[fit-content] p-1 px-3 self-center rounded-sm border-white border hover:bg-white hover:text-black transition duration-300 cursor-pointer">
+            <button onClick={() => router.push(`/home?page=${page - 1}`)}>
+              Previous
+            </button>
+          </div>
+        )}
+
+        <div className="mt-5 mb-3 flex text-white items-center justify-center w-[fit-content] p-1 px-3 self-center rounded-sm border-white border hover:bg-white hover:text-black transition duration-300 cursor-pointer ">
+          <button
+            className="outline-none"
+            onClick={() => router.push(`/home?page=${page + 1}`)}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );
