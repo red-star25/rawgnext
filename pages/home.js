@@ -23,16 +23,11 @@ export async function getServerSideProps({ query: { page = 1 } }) {
     `https://api.rawg.io/api/games?key=${process.env.API_KEY}&dates=2021-01-01,2021-03-30&page=${page}`
   );
   const data = await res.json();
-  try {
-    if (res.status === 200) {
-      return {
-        props: {
-          games: data,
-          page: +page,
-        },
-      };
-    }
-  } catch (error) {
-    console.log(error);
-  }
+
+  return {
+    props: {
+      games: data,
+      page: +page,
+    },
+  };
 }
