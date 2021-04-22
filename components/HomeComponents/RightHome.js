@@ -56,21 +56,21 @@ export default function RightHome({ gamesData, page }) {
 
   const router = useRouter();
 
-  const onMouseHover = (index) => {
-    if (document.getElementById(`${index + 1}`).classList.contains("hidden")) {
-      document.getElementById(`${index + 1}`).classList.remove("hidden");
-      document.getElementById(`${index + 1}`).classList.add("absolute");
-      document.getElementById(`${index + 1}`).classList.add("top-0");
-      document.getElementById(`${index + 1}`).classList.add("left-0");
-      document.getElementById(`${index + 1}`).classList.add("flex-col");
-      document.getElementById(`${index + 1}`).classList.add("flex");
-      document.getElementById(`${index + 1}`).classList.add("item-center");
-      document.getElementById(`${index + 1}`).classList.add("justify-center");
+  const onMouseHover = (id) => {
+    if (document.getElementById(`${id}`).classList.contains("hidden")) {
+      document.getElementById(`${id}`).classList.remove("hidden");
+      document.getElementById(`${id}`).classList.add("absolute");
+      document.getElementById(`${id}`).classList.add("top-0");
+      document.getElementById(`${id}`).classList.add("left-0");
+      document.getElementById(`${id}`).classList.add("flex-col");
+      document.getElementById(`${id}`).classList.add("flex");
+      document.getElementById(`${id}`).classList.add("item-center");
+      document.getElementById(`${id}`).classList.add("justify-center");
     }
   };
-  const onMouseHoverLeave = (index) => {
-    if (!document.getElementById(`${index + 1}`).classList.contains("hidden")) {
-      document.getElementById(`${index + 1}`).classList.add("hidden");
+  const onMouseHoverLeave = (id) => {
+    if (!document.getElementById(`${id}`).classList.contains("hidden")) {
+      document.getElementById(`${id}`).classList.add("hidden");
     }
   };
   return (
@@ -107,8 +107,8 @@ export default function RightHome({ gamesData, page }) {
           }
           return (
             <div
-              // onMouseOver={() => onMouseHover(index)}
-              // onMouseOut={() => onMouseHoverLeave(index)}
+              onMouseOver={() => onMouseHover(games["id"])}
+              onMouseOut={() => onMouseHoverLeave(games["id"])}
               className="bg-[#181A1B] w-[100%] h-[fit-content] rounded-xl pb-5  hover:scale-105 transform transition duration-200 relative"
             >
               <img
@@ -118,32 +118,44 @@ export default function RightHome({ gamesData, page }) {
               />
               <div className="flex pl-3 items-center justify-between mx-2">
                 <div className="flex  w-[80%] overflow-hidden">
-                  {games["parent_platforms"].map((platform, idx) => {
-                    return (
-                      <div key={idx} className="mr-3 mt-3 text-white">
-                        {platform["platform"]["name"] === "PC" ? (
-                          listOfPlatFormSvg[0]
-                        ) : platform["platform"]["name"] === "Xbox" ? (
-                          listOfPlatFormSvg[1]
-                        ) : platform["platform"]["name"] === "PlayStation" ? (
-                          listOfPlatFormSvg[2]
-                        ) : platform["platform"]["name"] ===
-                          "Nintendo Switch" ? (
-                          listOfPlatFormSvg[3]
-                        ) : platform["platform"]["name"] === "iOS" ? (
-                          listOfPlatFormSvg[4]
-                        ) : platform["platform"]["name"] === "Android" ? (
-                          listOfPlatFormSvg[5]
-                        ) : (
-                          <div />
-                        )}
-                      </div>
-                    );
-                  })}
+                  {games["parent_platforms"] != null ? (
+                    games["parent_platforms"].map((platform, idx) => {
+                      return (
+                        <div key={idx} className="mr-3 mt-3 text-white">
+                          {platform["platform"]["name"] === "PC" ? (
+                            listOfPlatFormSvg[0]
+                          ) : platform["platform"]["name"] === "Xbox" ? (
+                            listOfPlatFormSvg[1]
+                          ) : platform["platform"]["name"] === "PlayStation" ? (
+                            listOfPlatFormSvg[2]
+                          ) : platform["platform"]["name"] ===
+                            "Nintendo Switch" ? (
+                            listOfPlatFormSvg[3]
+                          ) : platform["platform"]["name"] === "iOS" ? (
+                            listOfPlatFormSvg[4]
+                          ) : platform["platform"]["name"] === "Android" ? (
+                            listOfPlatFormSvg[5]
+                          ) : (
+                            <div />
+                          )}
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div />
+                  )}
                 </div>
                 <div>
                   {games["metacritic"] != null ? (
-                    <div className="text-yellow-500 border-yellow-500 text-sm font-bold h-6 w-6 border flex items-center justify-center  rounded-md mt-2 self-end">
+                    <div
+                      className={`${
+                        games["metacritic"] >= 50 && games["metacritic"] < 80
+                          ? "text-yellow-500 border-yellow-500"
+                          : games["metacritic"] >= 80
+                          ? "text-green-500 border-green-500"
+                          : "text-red-500 border-red-500"
+                      } text-sm font-bold h-6 w-6 border flex items-center justify-center rounded-md mt-2`}
+                    >
                       {games["metacritic"]}
                     </div>
                   ) : (
@@ -170,38 +182,38 @@ export default function RightHome({ gamesData, page }) {
                       d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                     />
                   </svg>
-                  <p className="text-white text-sm">
-                    {games["addToCollection"]}
-                  </p>
+                  <p className="text-white text-sm">{games["added"]}</p>
                 </div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5 mr-2"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="#fff"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1"
-                    d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
-                  />
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 mx-2 cursor-pointer"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="#fff"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
-                  />
-                </svg>
+                <div className="flex">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="#fff"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1"
+                      d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
+                    />
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 mx-2 cursor-pointer"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="#fff"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
+                    />
+                  </svg>
+                </div>
               </div>
 
               <div
@@ -209,20 +221,26 @@ export default function RightHome({ gamesData, page }) {
                 className="hidden extraOnHoverInfo  pb-2 px-2 bg-[#181A1B] w-[100%] rounded-xl h-full 
             "
               >
-                <div className="flex justify-center  pb-2 text-white font-bold text-xl">
-                  About
-                </div>
                 <div className="flex justify-between items-center pb-6 ">
                   <p className="text-gray-500 text-xs">Release date:</p>
-                  <p className="text-white text-sm">Dec 31, 2022</p>
+                  <p className="text-white text-sm">{games["released"]}</p>
+                </div>
+                <div className="flex flex-col  items-start pb-6 w-[100%] ">
+                  <p className="text-gray-500 text-xs mb-1">Genres:</p>
+                  <div className="flex w-[100%] break-all">
+                    {games["genres"].map((genre, index) => {
+                      return (
+                        <p className="text-white text-sm text-left">
+                          {genre["name"]}
+                          {games["genres"].length === index + 1 ? "" : ","}
+                        </p>
+                      );
+                    })}
+                  </div>
                 </div>
                 <div className="flex justify-between items-center pb-6">
-                  <p className="text-gray-500 text-xs">Genres:</p>
-                  <p className="text-white text-sm">Action, RPG</p>
-                </div>
-                <div className="flex justify-between items-center pb-6">
-                  <p className="text-gray-500 text-xs">Chart:</p>
-                  <p className="text-white text-sm">#1 Top 2022</p>
+                  <p className="text-gray-500 text-xs">Rating:</p>
+                  <p className="text-white text-sm">{games["rating"]}</p>
                 </div>
                 <div className="mt-4 flex justify-between items-center">
                   <p className="text-white text-sm">Show more like this</p>
@@ -254,15 +272,18 @@ export default function RightHome({ gamesData, page }) {
           <div />
         ) : (
           <div className="mr-2 mt-5 mb-3 flex text-white items-center justify-center w-[fit-content] p-1 px-3 self-center rounded-sm border-white border hover:bg-white hover:text-black transition duration-300 cursor-pointer">
-            <button onClick={() => router.push(`/home?page=${page - 1}`)}>
+            <button
+              className="outline-none focus:outline-none"
+              onClick={() => router.push(`/home?page=${page - 1}`)}
+            >
               Previous
             </button>
           </div>
         )}
 
-        <div className="mt-5 mb-3 flex text-white items-center justify-center w-[fit-content] p-1 px-3 self-center rounded-sm border-white border hover:bg-white hover:text-black transition duration-300 cursor-pointer ">
+        <div className="mt-5 mb-3 flex text-white items-center justify-center w-[fit-content] p-1 px-3 self-center rounded-sm border-white border hover:bg-white hover:text-black transition duration-300 cursor-pointer outline-none ">
           <button
-            className="outline-none"
+            className="outline-none focus:outline-none"
             onClick={() => router.push(`/home?page=${page + 1}`)}
           >
             Next
