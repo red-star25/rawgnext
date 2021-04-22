@@ -1,8 +1,43 @@
 import StackGrid from "react-stack-grid";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import Image from "next/image";
+import { useState, useEffect } from "react";
 
 export default function RightHome({ gamesData, page }) {
+  const size = useWindowSize();
+
+  function useWindowSize() {
+    // Initialize state with undefined width/height so server and client renders match
+    const [windowSize, setWindowSize] = useState({
+      width: undefined,
+      height: undefined,
+    });
+
+    useEffect(() => {
+      // only execute all the code below in client side
+      if (typeof window !== "undefined") {
+        // Handler to call on window resize
+        function handleResize() {
+          // Set window width/height to state
+          setWindowSize({
+            width: window.innerWidth,
+            height: window.innerHeight,
+          });
+        }
+
+        // Add event listener
+        window.addEventListener("resize", handleResize);
+
+        // Call handler right away so state gets updated with initial window size
+        handleResize();
+
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", handleResize);
+      }
+    }, []); // Empty array ensures that effect is only run on mount
+    return windowSize;
+  }
+
   var listOfPlatFormSvg = [
     <svg
       class="h-3 w-3 "
@@ -75,12 +110,18 @@ export default function RightHome({ gamesData, page }) {
   };
   return (
     <div>
-      <h1 className="text-white text-6xl font-bold">New and Trending</h1>
-      <p className="text-gray-200 pt-1">
-        Based on player counts and release date
-      </p>
+      <div className="hidden md:block">
+        <h1 className=" text-white text-6xl font-bold ">New and Trending</h1>
+        <p className=" text-gray-200 pt-1 ">
+          Based on player counts and release date
+        </p>
+      </div>
+      <div className="flex flex-col items-center justify-center md:hidden">
+        <h1 className=" text-white text-4xl font-bold ">Top picks</h1>
+        <p className="text-gray-200 pt-1">Based on your ratings</p>
+      </div>
 
-      <div className="flex items-center mt-7 cursor-pointer  text-white">
+      <div className="flex items-center mt-7 cursor-pointer  text-white ">
         Order by:
         <span className="text-white font-bold text-sm pl-2 flex hover:text-[#666666] transition duration-150 ">
           Relevance{" "}
@@ -100,173 +141,207 @@ export default function RightHome({ gamesData, page }) {
           </svg>
         </span>
       </div>
-      <StackGrid className="mt-3" columnWidth={"25%"} gutterHeight={10}>
-        {gamesData["results"].map((games, index) => {
-          {
-            /* console.log(index); */
+      <div className="w-[100%]">
+        <StackGrid
+          className="mt-3"
+          columnWidth={
+            size.width >= 1024
+              ? "25%"
+              : size.width >= 768
+              ? "33.3%"
+              : size.width >= 460
+              ? "50%"
+              : "100%"
           }
-          return (
-            <div
-              onMouseOver={() => onMouseHover(games["id"])}
-              onMouseOut={() => onMouseHoverLeave(games["id"])}
-              className="bg-[#181A1B] w-[100%] h-[fit-content] rounded-xl pb-5  hover:scale-105 transform transition duration-200 relative"
-            >
-              <img
-                className="w-[100%] h-36 rounded-xl object-cover"
-                src={games["background_image"]}
-                alt=""
-              />
-              <div className="flex pl-3 items-center justify-between mx-2">
-                <div className="flex  w-[80%] overflow-hidden">
-                  {games["parent_platforms"] != null ? (
-                    games["parent_platforms"].map((platform, idx) => {
-                      return (
-                        <div key={idx} className="mr-3 mt-3 text-white">
-                          {platform["platform"]["name"] === "PC" ? (
-                            listOfPlatFormSvg[0]
-                          ) : platform["platform"]["name"] === "Xbox" ? (
-                            listOfPlatFormSvg[1]
-                          ) : platform["platform"]["name"] === "PlayStation" ? (
-                            listOfPlatFormSvg[2]
-                          ) : platform["platform"]["name"] ===
-                            "Nintendo Switch" ? (
-                            listOfPlatFormSvg[3]
-                          ) : platform["platform"]["name"] === "iOS" ? (
-                            listOfPlatFormSvg[4]
-                          ) : platform["platform"]["name"] === "Android" ? (
-                            listOfPlatFormSvg[5]
-                          ) : (
-                            <div />
-                          )}
-                        </div>
-                      );
-                    })
-                  ) : (
-                    <div />
-                  )}
-                </div>
-                <div>
-                  {games["metacritic"] != null ? (
-                    <div
-                      className={`${
-                        games["metacritic"] >= 50 && games["metacritic"] < 80
-                          ? "text-yellow-500 border-yellow-500"
-                          : games["metacritic"] >= 80
-                          ? "text-green-500 border-green-500"
-                          : "text-red-500 border-red-500"
-                      } text-sm font-bold h-6 w-6 border flex items-center justify-center rounded-md mt-2`}
-                    >
-                      {games["metacritic"]}
-                    </div>
-                  ) : (
-                    <div />
-                  )}
-                </div>
-              </div>
-              <div className="text-white text-xl font-bold w-[80%] mb-4 pl-3 pt-2">
-                {games["name"]}
-              </div>
-              <div className="mt-3 flex  items-start">
-                <div className="flex mr-5">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 mx-2 cursor-pointer"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="#fff"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="3"
-                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                    />
-                  </svg>
-                  <p className="text-white text-sm">{games["added"]}</p>
-                </div>
-                <div className="flex">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 mr-2"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="#fff"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1"
-                      d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
-                    />
-                  </svg>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6 mx-2 cursor-pointer"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="#fff"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
-                    />
-                  </svg>
-                </div>
-              </div>
-
+          gutterHeight={10}
+        >
+          {gamesData["results"].map((games, index) => {
+            return (
               <div
-                id={games["id"]}
-                className="hidden extraOnHoverInfo  pb-2 px-2 bg-[#181A1B] w-[100%] rounded-xl h-full 
-            "
+                onMouseOver={() => onMouseHover(games["id"])}
+                onMouseOut={() => onMouseHoverLeave(games["id"])}
+                className="pointer-events-none sm:pointer-events-auto bg-[#181A1B] sm:w-[fit-content] h-[fit-content] rounded-xl pb-5  hover:scale-105 transform transition duration-200 relative m-1"
               >
-                <div className="flex justify-between items-center pb-6 ">
-                  <p className="text-gray-500 text-xs">Release date:</p>
-                  <p className="text-white text-sm">{games["released"]}</p>
-                </div>
-                <div className="flex flex-col  items-start pb-6 w-[100%] ">
-                  <p className="text-gray-500 text-xs mb-1">Genres:</p>
-                  <div className="flex w-[100%] break-all">
-                    {games["genres"].map((genre, index) => {
-                      return (
-                        <p className="text-white text-sm text-left">
-                          {genre["name"]}
-                          {games["genres"].length === index + 1 ? "" : ","}
-                        </p>
-                      );
-                    })}
+                <Image
+                  className="rounded-xl"
+                  src={games["background_image"]}
+                  width={400}
+                  height={150}
+                  quality={75}
+                  objectFit="cover"
+                />
+                <div className="flex pl-3 items-center justify-between mx-2">
+                  <div className="flex  w-[80%] overflow-hidden">
+                    {games["parent_platforms"] != null ? (
+                      games["parent_platforms"].map((platform, idx) => {
+                        return (
+                          <div key={idx} className="mr-3 mt-3 text-white">
+                            {platform["platform"]["name"] === "PC" ? (
+                              listOfPlatFormSvg[0]
+                            ) : platform["platform"]["name"] === "Xbox" ? (
+                              listOfPlatFormSvg[1]
+                            ) : platform["platform"]["name"] ===
+                              "PlayStation" ? (
+                              listOfPlatFormSvg[2]
+                            ) : platform["platform"]["name"] ===
+                              "Nintendo Switch" ? (
+                              listOfPlatFormSvg[3]
+                            ) : platform["platform"]["name"] === "iOS" ? (
+                              listOfPlatFormSvg[4]
+                            ) : platform["platform"]["name"] === "Android" ? (
+                              listOfPlatFormSvg[5]
+                            ) : (
+                              <div />
+                            )}
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <div />
+                    )}
+                  </div>
+                  <div>
+                    {games["metacritic"] != null ? (
+                      <div
+                        className={`${
+                          games["metacritic"] >= 50 && games["metacritic"] < 80
+                            ? "text-yellow-500 border-yellow-500"
+                            : games["metacritic"] >= 80
+                            ? "text-green-500 border-green-500"
+                            : "text-red-500 border-red-500"
+                        } text-sm font-bold h-6 w-6 border flex items-center justify-center rounded-md mt-2`}
+                      >
+                        {games["metacritic"]}
+                      </div>
+                    ) : (
+                      <div />
+                    )}
                   </div>
                 </div>
-                <div className="flex justify-between items-center pb-6">
-                  <p className="text-gray-500 text-xs">Rating:</p>
-                  <p className="text-white text-sm">{games["rating"]}</p>
+                <div className="text-white text-xl font-bold w-[80%] mb-4 pl-3 pt-2">
+                  {games["name"]}
                 </div>
-                <div className="mt-4 flex justify-between items-center">
-                  <p className="text-white text-sm">Show more like this</p>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="#606060"
+                <div className="mt-3 flex  items-start">
+                  <div className="flex mr-5">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 mx-2 cursor-pointer"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="#fff"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="3"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                      />
+                    </svg>
+                    <p className="text-white text-sm">{games["added"]}</p>
+                  </div>
+                  <div className="flex">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 mr-2"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="#fff"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1"
+                        d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
+                      />
+                    </svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-6 w-6 mx-2 cursor-pointer"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="#fff"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div className=" pt-2 flex items-center justify-center">
+                  <p
+                    onClick={() => {
+                      onMouseHover(games["id"]);
+                    }}
+                    className="pointer-events-auto text-white text-xs sm:hidden"
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
+                    View more
+                  </p>
                 </div>
-                <div className="mt-4">
-                  <p className="text-white text-sm">Hide this game</p>
+                <div
+                  id={games["id"]}
+                  className="hidden extraOnHoverInfo pb-2 px-2 pt-4 bg-[#181A1B] w-[100%] rounded-xl h-full 
+            "
+                >
+                  <div className="flex justify-between items-center pb-6 ">
+                    <p className="text-gray-500 text-xs">Release date:</p>
+                    <p className="text-white text-sm">{games["released"]}</p>
+                  </div>
+                  <div className="flex flex-col  items-start pb-6 w-[100%] ">
+                    <p className="text-gray-500 text-xs mb-1">Genres:</p>
+                    <div className="flex w-[100%] break-all">
+                      {games["genres"].map((genre, index) => {
+                        return (
+                          <p className="text-white text-sm text-left">
+                            {genre["name"]}
+                            {games["genres"].length === index + 1 ? "" : ","}
+                          </p>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center pb-6">
+                    <p className="text-gray-500 text-xs">Rating:</p>
+                    <p className="text-white text-sm">{games["rating"]}</p>
+                  </div>
+                  <div className=" pt-2 flex items-center justify-center">
+                    <p
+                      onClick={() => {
+                        onMouseHoverLeave(games["id"]);
+                      }}
+                      className="pointer-events-auto text-white text-xs sm:hidden"
+                    >
+                      View less
+                    </p>
+                  </div>
+                  <div className="mt-1 flex justify-between items-center">
+                    <p className="text-white text-sm">Show more like this</p>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="#606060"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </div>
+                  <div className="mt-2">
+                    <p className="text-white text-sm">Hide this game</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-      </StackGrid>
+            );
+          })}
+        </StackGrid>
+      </div>
       <div className="flex items-center ">
         {page <= 1 ? (
           <div />

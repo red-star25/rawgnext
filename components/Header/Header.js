@@ -18,13 +18,38 @@ export default function Header() {
           />
         </svg>
         <input
-          className="flex w-full rounded-full pl-2 bg-black outline-none placeholder-gray-500 text-[15px] hover:bg-gray-900 h-full transition duration-200"
+          className="hidden md:flex w-full rounded-full pl-2 bg-black outline-none placeholder-gray-500 text-[15px] hover:bg-gray-900 h-full transition duration-200"
           style={{ caretColor: "white" }}
           type="text"
           placeholder="Search 537,393 games"
         />
+        <input
+          className="flex w-full rounded-full pl-2 bg-black outline-none placeholder-gray-500 text-[15px] hover:bg-gray-900 h-full transition duration-200 md:hidden"
+          style={{ caretColor: "white" }}
+          type="text"
+          placeholder="Search"
+        />
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center md:hidden">
+        <div className="flex items-center justify-center w-8 h-8 mx-3 rounded-full bg-purple-800 cursor-pointer text-white font-bold text-xs">
+          <h4>RS</h4>
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="#fff"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </div>
+      <div className="hidden items-center md:flex">
         <div className="flex items-center justify-center w-10 h-10 ml-3 rounded-full bg-purple-800 cursor-pointer text-white font-bold text-lg">
           <h4>RS</h4>
         </div>
