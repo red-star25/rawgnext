@@ -32,4 +32,5 @@ export async function getServerSideProps({ query: { page = 1 } }) {
       },
     };
   }
+  console.log("d");
 }
