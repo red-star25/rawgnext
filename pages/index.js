@@ -32,11 +32,4 @@ export async function getServerSideProps({ query: { page = 1 } }) {
       },
     };
   }
-
-  return {
-    redirect: {
-      destination: "/",
-      permanent: false,
-    },
-  };
 }
