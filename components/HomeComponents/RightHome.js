@@ -349,7 +349,7 @@ export default function RightHome({ gamesData, page }) {
           <div className="mr-2 mt-5 mb-3 flex text-white items-center justify-center w-[fit-content] p-1 px-3 self-center rounded-sm border-white border hover:bg-white hover:text-black transition duration-300 cursor-pointer">
             <button
               className="outline-none focus:outline-none"
-              onClick={() => router.push(`/home?page=${page - 1}`)}
+              onClick={() => router.push(`/?page=${page - 1}`)}
             >
               Previous
             </button>
@@ -359,7 +359,7 @@ export default function RightHome({ gamesData, page }) {
         <div className="mt-5 mb-3 flex text-white items-center justify-center w-[fit-content] p-1 px-3 self-center rounded-sm border-white border hover:bg-white hover:text-black transition duration-300 cursor-pointer outline-none ">
           <button
             className="outline-none focus:outline-none"
-            onClick={() => router.push(`/home?page=${page + 1}`)}
+            onClick={() => router.push(`/?page=${page + 1}`)}
           >
             Next
           </button>
