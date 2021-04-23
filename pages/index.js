@@ -24,6 +24,8 @@ export async function getServerSideProps({ query: { page = 1 } }) {
   );
   const data = await res.json();
 
+  console.log(data);
+
   if (res.status < 300) {
     return {
       props: {
