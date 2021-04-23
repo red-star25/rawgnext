@@ -20,7 +20,7 @@ export default function Home({ games, page }) {
 
 export async function getServerSideProps({ query: { page = 1 } }) {
   const res = await fetch(
-    `https://api.rawg.io/api/games?key=${process.env.API_KEY}&dates=2021-01-01,2021-03-30&page=${page}`
+    `https://api.rawg.io/api/games?key=8eabc9be89b44ca08d2c846ae180277d&dates=2021-01-01,2021-03-30&page=${page}`
   );
   const data = await res.json();
 
