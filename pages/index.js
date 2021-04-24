@@ -19,13 +19,26 @@ export default function Home({ games, page }) {
 }
 
 export async function getServerSideProps({
-  query: { page = 1, date = "", genres = "", search = "" },
+  query: {
+    page = 1,
+    date = "",
+    genres = "",
+    search = "",
+    tags = "",
+    creators = "",
+    developers = "",
+    publishers = "",
+  },
 }) {
   const res = await fetch(
-    `https://api.rawg.io/api/games?key=${process.env.API_KEY}&dates=${
-      date !== "" ? `date=${date}` : "2021-01-01,2021-03-30"
-    }&page=${page}&${genres !== "" ? `genres=${genres}` : ""}&${
-      search !== "" ? `search=${search}` : ""
+    `https://api.rawg.io/api/games?key=${process.env.API_KEY}${
+      date !== "" ? `&dates=${date}` : ""
+    }&page=${page}${genres !== "" ? `&genres=${genres}` : ""}${
+      search !== "" ? `&search=${search}` : ""
+    }${tags !== "" ? `&tags=${tags}` : ""}${
+      creators !== "" ? `&creators=${creators}` : ""
+    }${developers !== "" ? `&developers=${developers}` : ""}${
+      publishers !== "" ? `&publishers=${publishers}` : ""
     }`
   );
   const data = await res.json();

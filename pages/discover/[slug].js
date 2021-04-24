@@ -8,11 +8,11 @@ export default function Home() {
   return (
     <div className="w-[100%] bg-black px-5">
       <Header />
-      <div className=" mt-10 w-[100%] h-[100%] flex ">
+      <div className=" mt-10 w-[100%] flex ">
         <div className="w-[0%] hidden lg:flex lg:w-[17%]">
           <LeftHome />
         </div>
-        <div className="w-[100%] ml-4 lg:w-[83%]">
+        <div className="w-[100%] h-[100vh] ml-4 lg:w-[83%]">
           <p className="text-white text-7xl font-bold">{slug}</p>
           <div className="flex items-center mt-7 cursor-pointer  text-white ">
             Order by:

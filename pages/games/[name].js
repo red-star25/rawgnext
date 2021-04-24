@@ -124,8 +124,8 @@ const GameDetails = ({ gamesList }) => {
           </div>
           {selectedGameData != null ? (
             <div className="w-[100%]  ml-4 lg:w-[78%]">
-              <div className="w-[100%] h-[100%] flex">
-                <div className="leftPart w-[50%] h-[fit-content] ">
+              <div className="w-[100%] h-[100%] flex flex-col md:flex-row">
+                <div className="leftPart w-[100%] h-[fit-content] md:w-[50%]">
                   <div className="flex">
                     <p
                       onClick={() => {
@@ -178,8 +178,8 @@ const GameDetails = ({ gamesList }) => {
                   <div className="text-white text-7xl font-bold mt-12">
                     {selectedGameData["name"]}
                   </div>
-                  <div className="flex mt-12">
-                    <div className="bg-[#161819] h-14 rounded-lg flex-1 flex items-center justify-around">
+                  <div className="flex flex-col mt-12 md:flex-row">
+                    <div className="bg-[#161819] h-14 rounded-lg flex-1 flex items-center justify-between p-3 md:justify-around md:p-0">
                       <div>
                         <p className="text-[#626363] text-xs mb-1">Add to</p>
                         <div className="flex">
@@ -191,7 +191,7 @@ const GameDetails = ({ gamesList }) => {
                           </p>
                         </div>
                       </div>
-                      <div className="h-10 w-10 rounded-full bg-green-500 flex items-center justify-center">
+                      <div className="h-10 w-10 rounded-full bg-green-500 flex items-center justify-center ">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           class="h-8 w-8"
@@ -208,7 +208,7 @@ const GameDetails = ({ gamesList }) => {
                         </svg>
                       </div>
                     </div>
-                    <div className="bg-[#161819] h-14 rounded-lg flex-1 flex items-center justify-around mx-3">
+                    <div className="bg-[#161819] h-14 rounded-lg flex-1 flex items-center justify-between p-3 md:justify-around md:p-0 md:mx-3">
                       <div>
                         <p className="text-[#626363] text-xs mb-1">Add to</p>
                         <div className="flex">
@@ -237,7 +237,7 @@ const GameDetails = ({ gamesList }) => {
                         </svg>
                       </div>
                     </div>
-                    <div className="bg-[#161819] h-14 rounded-lg flex-1 flex items-center justify-around">
+                    <div className="bg-[#161819] h-14 rounded-lg flex-1 flex items-center justify-between p-3 md:justify-around md:p-0 md:mx-3">
                       <div>
                         <p className="text-[#626363] text-xs mb-1">Save to</p>
 
@@ -262,7 +262,7 @@ const GameDetails = ({ gamesList }) => {
                     </div>
                   </div>
                   <div className="mt-12 flex">
-                    <div className="flex flex-1 flex-col">
+                    <div className="flex flex-1 flex-col items-center">
                       <p className="text-white font-bold text-xl">
                         Exceptional
                       </p>
@@ -273,7 +273,7 @@ const GameDetails = ({ gamesList }) => {
                         RATINGS
                       </p>
                     </div>
-                    <div className="flex flex-1 flex-col">
+                    <div className="flex flex-1 flex-col items-center">
                       <p className="text-white text-xl font-bold">
                         #{" "}
                         {selectedGameData["reviews_count"] != null
@@ -284,7 +284,7 @@ const GameDetails = ({ gamesList }) => {
                         TOTAL RATINGS
                       </p>
                     </div>
-                    <div className="flex flex-1 flex-col">
+                    <div className="flex flex-1 flex-col items-center">
                       <p className="text-white text-xl font-bold">
                         #{" "}
                         {selectedGameData["metacritic"] != null
@@ -302,7 +302,7 @@ const GameDetails = ({ gamesList }) => {
                           return (
                             <div
                               key={idx}
-                              className="flex items-center justify-around flex-1"
+                              className="flex items-center  flex-col flex-1 md:justify-around"
                             >
                               <p className={`text-white  text-sm   `}>
                                 {rating["title"][0].toUpperCase() +
@@ -419,7 +419,7 @@ const GameDetails = ({ gamesList }) => {
                     </div>
                   </div>
                 </div>
-                <div className="rightPart w-[50%] h-[fit-content] ml-5 flex flex-col">
+                <div className="rightPart w-[100%] h-[fit-content] mt-5 flex flex-col md:ml-5 md:w-[50%] md:mt-0">
                   <p className="text-[#626363] text-2xl mb-5  ">Screenshots</p>
                   <div className="grid gap-x-5 w-[100%] grid-cols-2">
                     {selectedGameData["short_screenshots"].map((ss, idx) => {
@@ -461,7 +461,7 @@ const GameDetails = ({ gamesList }) => {
               </div>
             </div>
           ) : (
-            <div className="flex  justify-center">
+            <div className="flex justify-center w-[100%] h-[100vh] bg-black">
               <p className="text-white text-4xl w-[60%] text-center">
                 Sorry, we are not able to fetch the details of {name} ...
               </p>

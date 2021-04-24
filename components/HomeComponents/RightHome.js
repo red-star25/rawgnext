@@ -160,16 +160,20 @@ export default function RightHome({ gamesData, page }) {
               }
               onMouseOver={() => onMouseHover(games["id"])}
               onMouseOut={() => onMouseHoverLeave(games["id"])}
-              className="pointer-events-none sm:pointer-events-auto bg-[#181A1B] sm:w-[fit-content] h-[fit-content] rounded-xl pb-5  hover:scale-105 transform transition duration-200 relative m-1"
+              className=" bg-[#181A1B] sm:w-[fit-content] h-[fit-content] rounded-xl pb-5  hover:scale-105 transform transition duration-200 relative m-1"
             >
-              <Image
-                className="rounded-xl"
-                src={games["background_image"]}
-                width={400}
-                height={150}
-                quality={75}
-                objectFit="cover"
-              />
+              {games["background_image"] != null ? (
+                <Image
+                  className="rounded-xl"
+                  src={games["background_image"]}
+                  width={400}
+                  height={150}
+                  quality={75}
+                  objectFit="cover"
+                />
+              ) : (
+                <div className="w-[270px] h-[210px] rounded-xl"></div>
+              )}
               <div className="flex pl-3 items-center justify-between mx-2">
                 <div className="flex  w-[80%] overflow-hidden">
                   {games["parent_platforms"] != null ? (
@@ -269,16 +273,7 @@ export default function RightHome({ gamesData, page }) {
                   </svg>
                 </div>
               </div>
-              <div className=" pt-2 flex items-center justify-center">
-                <p
-                  onClick={() => {
-                    onMouseHover(games["id"]);
-                  }}
-                  className="pointer-events-auto text-white text-xs sm:hidden"
-                >
-                  View more
-                </p>
-              </div>
+
               <div
                 id={games["id"]}
                 className="hidden cursor-pointer extraOnHoverInfo pb-2 px-2 pt-4 bg-[#181A1B] w-[100%] rounded-xl h-full 
@@ -305,16 +300,7 @@ export default function RightHome({ gamesData, page }) {
                   <p className="text-gray-500 text-xs">Rating:</p>
                   <p className="text-white text-sm">{games["rating"]}</p>
                 </div>
-                <div className=" pt-2 flex items-center justify-center">
-                  <p
-                    onClick={() => {
-                      onMouseHoverLeave(games["id"]);
-                    }}
-                    className="pointer-events-auto text-white text-xs sm:hidden"
-                  >
-                    View less
-                  </p>
-                </div>
+
                 <div className="mt-1 flex justify-between items-center">
                   <p className="text-white text-sm">Show more like this</p>
                   <svg

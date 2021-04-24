@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply scrollbar-hide;
+  }
+}
+
 @layer components {
   .headings {
     @apply text-white text-2xl font-bold pb-5 w-min;

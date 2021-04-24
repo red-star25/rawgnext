@@ -8,7 +8,8 @@ module.exports = {
   variants: {
     extend: {
       stroke: ["hover", "focus"],
+      pointerEvents: ["hover"],
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar-hide")],
 };

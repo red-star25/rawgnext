@@ -43,10 +43,10 @@ export default function BrowseComponent({ data, page, title, hasPage }) {
 
   return (
     <div>
-      <div className="hidden md:block mb-2">
+      <div className="hidden md:block mb-5">
         <h1 className=" text-white text-6xl font-bold ">{title}</h1>
       </div>
-      <div className="flex flex-col mb-2 items-center justify-center md:hidden">
+      <div className="flex flex-col mb-5 items-center justify-center md:hidden">
         <h1 className=" text-white text-4xl font-bold ">{title}</h1>
       </div>
 
@@ -64,8 +64,27 @@ export default function BrowseComponent({ data, page, title, hasPage }) {
         {data["results"].map((items, index) => {
           return (
             <div
+              onClick={() => {
+                switch (title) {
+                  case "Tags":
+                    router.push(`/?tags=${items["slug"]}`);
+                    break;
+                  case "Creators":
+                    router.push(`/?creators=${items["slug"]}`);
+                    break;
+                  case "Developers":
+                    router.push(`/?developers=${items["slug"]}`);
+                    break;
+                  case "Publishers":
+                    router.push(`/?publishers=${items["slug"]}`);
+                    break;
+                  case "Genres":
+                    router.push(`/?genres=${items["slug"]}`);
+                    break;
+                }
+              }}
               key={index}
-              className="pointer-events-none sm:pointer-events-auto sm:w-[fit-content] h-[fit-content] rounded-xl pb-5 hover:scale-105 transform transition duration-200  m-1  "
+              className="cursor-pointer sm:w-[fit-content] h-[fit-content] rounded-xl pb-5 hover:scale-105 transform transition duration-200  m-1  "
             >
               {items["image_background"] != null ? (
                 <div className="bg-gradient-to-t from-[#212121] z-50">
