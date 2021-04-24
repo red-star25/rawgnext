@@ -1,7 +1,37 @@
+import { useRouter } from "next/router";
+
 export default function LeftHome() {
+  const router = useRouter();
+
+  const getDate = function (dateRequired, { isNext = false }) {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = yyyy + "-" + mm + "-" + dd;
+
+    var date = new Date();
+    if (isNext) date.setDate(date.getDate() + dateRequired);
+    else date.setDate(date.getDate() - dateRequired);
+    var dateFormat =
+      date.getFullYear() +
+      "-" +
+      ("0" + (date.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("0" + date.getDate()).slice(-2);
+
+    return `${dateFormat},${today}`;
+  };
+
   return (
     <div className="pl-3 pt-3">
-      <h1 className="headings cursor-pointer hover:text-gray-400 transition duration-150">
+      <h1
+        onClick={() => {
+          router.push("/");
+        }}
+        className="headings cursor-pointer hover:text-gray-400 transition duration-150"
+      >
         Home
       </h1>
       <h1 className="headings cursor-pointer hover:text-gray-400 transition duration-150">
@@ -17,7 +47,12 @@ export default function LeftHome() {
           </div>
         </div>
         <div className="user__sublist__menu pl-3">
-          <div className="flex pb-4 cursor-pointer">
+          <div
+            onClick={() => {
+              router.push("/discover/Wishlist");
+            }}
+            className="flex pb-4 cursor-pointer"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-6 w-6"
@@ -34,7 +69,12 @@ export default function LeftHome() {
             </svg>
             <h4 className="subheadings pl-3">Wishlist</h4>
           </div>
-          <div className="flex pb-4 cursor-pointer">
+          <div
+            onClick={() => {
+              router.push("/discover/My-Library");
+            }}
+            className="flex pb-4 cursor-pointer"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-6 w-6"
@@ -51,7 +91,12 @@ export default function LeftHome() {
             </svg>
             <h4 className="subheadings pl-3">My Library</h4>
           </div>
-          <div className="flex pb-4 cursor-pointer">
+          <div
+            onClick={() => {
+              router.push("/discover/Friends");
+            }}
+            className="flex pb-4 cursor-pointer"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-6 w-6"
@@ -73,7 +118,14 @@ export default function LeftHome() {
       <div className="flex-col">
         <h1 className="headings w-auto">New Releases</h1>
         <div className="user__sublist__menu pl-3">
-          <div className="flex pb-4 cursor-pointer">
+          <div
+            onClick={() => {
+              var finalDate = getDate(30, { isNext: false });
+
+              router.push(`/?page=1&date=${finalDate}`);
+            }}
+            className="flex pb-4 cursor-pointer"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-5 w-5"
@@ -84,7 +136,13 @@ export default function LeftHome() {
             </svg>
             <h4 className="subheadings pl-3">Last 30 days</h4>
           </div>
-          <div className="flex pb-4 cursor-pointer">
+          <div
+            onClick={() => {
+              var finalDate = getDate(7, { isNext: false });
+              router.push(`/?page=1&date=${finalDate}`);
+            }}
+            className="flex pb-4 cursor-pointer"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-5 w-5"
@@ -99,7 +157,13 @@ export default function LeftHome() {
             </svg>
             <h4 className="subheadings pl-3">This week</h4>
           </div>
-          <div className="flex pb-4 cursor-pointer">
+          <div
+            onClick={() => {
+              var finalDate = getDate(7, { isNext: true });
+              router.push(`/?page=1&date=${finalDate}`);
+            }}
+            className="flex pb-4 cursor-pointer"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-6 w-6"
@@ -193,7 +257,10 @@ export default function LeftHome() {
       <div className="flex-col">
         <h1 className="headings">Browse</h1>
         <div className="user__sublist__menu pl-3">
-          <div className="flex pb-4 cursor-pointer">
+          <div
+            onClick={() => router.push("/platforms")}
+            className="flex pb-4 cursor-pointer"
+          >
             <svg
               class="h-5 w-5"
               xmlns="http://www.w3.org/2000/svg"
@@ -208,7 +275,10 @@ export default function LeftHome() {
             </svg>
             <h4 className="subheadings pl-3">Platforms</h4>
           </div>
-          <div className="flex pb-4 cursor-pointer">
+          <div
+            onClick={() => router.push("/stores")}
+            className="flex pb-4 cursor-pointer"
+          >
             <svg
               class="h-5 w-5"
               xmlns="http://www.w3.org/2000/svg"
@@ -263,7 +333,10 @@ export default function LeftHome() {
       <div className="flex-col">
         <h1 className="headings">Platforms</h1>
         <div className="user__sublist__menu pl-3">
-          <div className="flex pb-4 cursor-pointer">
+          <div
+            onClick={() => router.push("/platforms/games?name=pc&page=1")}
+            className="flex pb-4 cursor-pointer"
+          >
             <svg
               class="h-5 w-5"
               viewBox="0 0 16 16"
@@ -276,7 +349,12 @@ export default function LeftHome() {
             </svg>
             <h4 className="subheadings pl-3">PC</h4>
           </div>
-          <div className="flex pb-4 cursor-pointer">
+          <div
+            onClick={() =>
+              router.push("/platforms/games?name=playstation&page=1")
+            }
+            className="flex pb-4 cursor-pointer"
+          >
             <svg
               class="h-5 w-5"
               viewBox="0 0 21 16"
@@ -289,8 +367,12 @@ export default function LeftHome() {
             </svg>
             <h4 className="subheadings pl-3">PlayStation4</h4>
           </div>
-          <div className="flex pb-3">
+          <div
+            onClick={() => router.push("/platforms/games?name=xbox&page=1")}
+            className="flex pb-3 cursor-pointer"
+          >
             <svg
+              onClick={() => router.push("/platforms/games?name=xbox&page=1")}
               class="h-5 w-5"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -326,7 +408,10 @@ export default function LeftHome() {
       <div className="flex-col">
         <h1 className="headings">Genres</h1>
         <div className="user__sublist__menu pl-3">
-          <div className="flex pb-4 cursor-pointer">
+          <div
+            onClick={() => router.push("/?genres=action")}
+            className="flex pb-4 cursor-pointer"
+          >
             <img
               className="w-7 h-7 rounded-md object-cover"
               src="https://i.ytimg.com/vi/47TkcN6GKv4/maxresdefault.jpg"
@@ -334,7 +419,10 @@ export default function LeftHome() {
             />
             <h4 className="subheadings pl-3">Action</h4>
           </div>
-          <div className="flex pb-4 cursor-pointer">
+          <div
+            onClick={() => router.push("/?genres=strategy")}
+            className="flex pb-4 cursor-pointer"
+          >
             <img
               className="w-7 h-7 rounded-md object-cover"
               src="https://i.ytimg.com/vi/4LCYYsmBJlU/maxresdefault.jpg"
@@ -342,13 +430,16 @@ export default function LeftHome() {
             />
             <h4 className="subheadings pl-3">Strategy</h4>
           </div>
-          <div className="flex pb-3 cursor-pointer">
+          <div
+            onClick={() => router.push("/?genres=indie")}
+            className="flex pb-3 cursor-pointer"
+          >
             <img
               className="w-7 h-7 rounded-md object-cover"
               src="https://www.gamebyte.com/wp-content/uploads/2018/07/rpg-1.jpg"
               alt=""
             />
-            <h4 className="subheadings pl-3">RPG</h4>
+            <h4 className="subheadings pl-3">Indie</h4>
           </div>
           <div className="flex pb-4 cursor-pointer">
             <svg

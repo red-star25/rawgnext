@@ -1,4 +1,11 @@
+import { useRouter } from "next/router";
+import { useState } from "react";
+
 export default function Header() {
+  const router = useRouter();
+
+  const [search, setSearch] = useState("");
+
   return (
     <div className="flex pt-6 items-center">
       <h3 className="font-extrabold pr-10 ml-4 text-white text-lg">R A W G</h3>
@@ -17,17 +24,26 @@ export default function Header() {
             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
           />
         </svg>
+
         <input
-          className="hidden md:flex w-full rounded-full pl-2 bg-black outline-none placeholder-gray-500 text-[15px] hover:bg-gray-900 h-full transition duration-200"
+          className="hidden text-white md:flex w-full rounded-full pl-2 bg-black outline-none placeholder-gray-500 text-[15px] hover:bg-gray-900 h-full transition duration-200"
           style={{ caretColor: "white" }}
           type="text"
           placeholder="Search 537,393 games"
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
         />
         <input
-          className="flex w-full rounded-full pl-2 bg-black outline-none placeholder-gray-500 text-[15px] hover:bg-gray-900 h-full transition duration-200 md:hidden"
+          className="flex w-full text-white rounded-full pl-2 bg-black outline-none placeholder-gray-500 text-[15px] hover:bg-gray-900 h-full transition duration-200 md:hidden"
           style={{ caretColor: "white" }}
           type="text"
           placeholder="Search"
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
         />
       </div>
       <div className="flex items-center md:hidden">

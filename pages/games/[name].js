@@ -127,11 +127,19 @@ const GameDetails = ({ gamesList }) => {
               <div className="w-[100%] h-[100%] flex">
                 <div className="leftPart w-[50%] h-[fit-content] ">
                   <div className="flex">
-                    <p className="text-[#596666] text-xs mx-1">HOME /</p>
-                    <p className="text-[#596666] text-xs mx-1 hover:text-white transition duration-200 cursor-pointer">
-                      GAMES
+                    <p
+                      onClick={() => {
+                        router.push("/");
+                      }}
+                      className="text-[#596666] text-xs mx-1 hover:text-white transition duration-200 cursor-pointer"
+                    >
+                      HOME
                     </p>
-                    <p className="text-[#596666] text-xs mx-1">/ {name}</p>
+                    <p className="text-[#596666] text-xs mx-1 ">/ GAMES /</p>
+                    <p className="text-[#596666] text-xs mx-1">
+                      {" "}
+                      {name.toUpperCase()}
+                    </p>
                   </div>
                   <div className="flex items-center mt-10">
                     {selectedGameData["parent_platforms"] != null ? (
