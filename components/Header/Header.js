@@ -78,12 +78,6 @@ export default function Header() {
               />
             </div>
             <div className="flex flex-col items-center justify-center ml-3 mt-8 gap-y-2">
-              <p
-                onClick={() => router.push("/platforms")}
-                className="cursor-pointer text-white text-2xl mb-3"
-              >
-                Platforms
-              </p>
               <p className="cursor-pointer text-white text-2xl mb-3">Stores</p>
               <p
                 onClick={() => router.push("/genres")}
@@ -111,9 +105,15 @@ export default function Header() {
               </p>
               <p
                 onClick={() => router.push("/publishers")}
-                className="cursor-pointer text-white text-2xl"
+                className="cursor-pointer text-white text-2xl mb-3"
               >
                 Publishers
+              </p>
+              <p
+                onClick={() => router.push("/platforms")}
+                className="cursor-pointer text-white text-2xl mb-3 "
+              >
+                Platforms
               </p>
             </div>
           </div>

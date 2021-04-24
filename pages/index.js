@@ -28,6 +28,7 @@ export async function getServerSideProps({
     creators = "",
     developers = "",
     publishers = "",
+    platforms = "",
   },
 }) {
   const res = await fetch(
@@ -39,7 +40,10 @@ export async function getServerSideProps({
       creators !== "" ? `&creators=${creators}` : ""
     }${developers !== "" ? `&developers=${developers}` : ""}${
       publishers !== "" ? `&publishers=${publishers}` : ""
-    }`
+    }${developers !== "" ? `&developers=${developers}` : ""}${
+      platforms !== "" ? `&platforms=${platforms}` : ""
+    }
+    `
   );
   const data = await res.json();
 

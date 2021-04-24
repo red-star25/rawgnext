@@ -145,6 +145,9 @@ const PlatformGames = ({ gamesData, page, name }) => {
               {gamesData["results"].map((games, index) => {
                 return (
                   <div
+                    onClick={() => {
+                      router.push(`/?platforms=${items["slug"]}`);
+                    }}
                     key={index}
                     onMouseOver={() => onMouseHover(games["id"])}
                     onMouseOut={() => onMouseHoverLeave(games["id"])}

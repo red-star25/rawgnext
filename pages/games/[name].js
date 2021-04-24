@@ -322,46 +322,7 @@ const GameDetails = ({ gamesList }) => {
                       ""
                     )}
                   </div>
-                  <div className="mt-12 flex ">
-                    <div className="flex items-center flex-1">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="#626363"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                        />
-                      </svg>
-                      <p className="text-[#626363] text-base">
-                        Write a review {selectedGameData["reviews_count"]}
-                      </p>
-                    </div>
-                    <div className="flex items-center flex-1">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="#626363"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                        />
-                      </svg>
-                      <p className="text-[#626363] text-base">
-                        Write a comment
-                      </p>
-                    </div>
-                  </div>
+
                   <div className="mt-12 flex">
                     <div className="flex flex-col flex-1">
                       <p className="text-lg text-[#626363]">Platforms</p>
