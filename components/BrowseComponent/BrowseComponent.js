@@ -2,8 +2,9 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
-export default function BrowseComponent({ data, page, title, hasPage }) {
+export default function BrowseComponent({ data, page, urlTitle }) {
   const size = useWindowSize();
+  const [title, setTitle] = useState("");
 
   function useWindowSize() {
     // Initialize state with undefined width/height so server and client renders match
@@ -39,7 +40,13 @@ export default function BrowseComponent({ data, page, title, hasPage }) {
 
   const router = useRouter();
 
-  // ios=3, pc=4,playstation=1
+  useEffect(() => {
+    var temp = `${urlTitle[0].toUpperCase()}${urlTitle.substr(
+      1,
+      urlTitle.length
+    )}`;
+    setTitle(temp);
+  }, [urlTitle]);
 
   return (
     <div>
@@ -64,22 +71,29 @@ export default function BrowseComponent({ data, page, title, hasPage }) {
         {data["results"].map((items, index) => {
           return (
             <div
+              key={index}
               onClick={() => {
                 switch (title) {
                   case "Tags":
-                    router.push(`/?tags=${items["slug"]}`);
+                    router.push(`/?tags=${items["slug"]}&urlTitle=tags`);
                     break;
                   case "Creators":
-                    router.push(`/?creators=${items["slug"]}`);
+                    router.push(
+                      `/?creators=${items["slug"]}&urlTitle=creators`
+                    );
                     break;
                   case "Developers":
-                    router.push(`/?developers=${items["slug"]}`);
+                    router.push(
+                      `/?developers=${items["slug"]}&urlTitle=developers`
+                    );
                     break;
                   case "Publishers":
-                    router.push(`/?publishers=${items["slug"]}`);
+                    router.push(
+                      `/?publishers=${items["slug"]}&urlTitle=publishers`
+                    );
                     break;
                   case "Genres":
-                    router.push(`/?genres=${items["slug"]}`);
+                    router.push(`/?genres=${items["slug"]}&urlTitle=genres`);
                     break;
                 }
               }}
@@ -133,33 +147,38 @@ export default function BrowseComponent({ data, page, title, hasPage }) {
           );
         })}
       </div>
-      {hasPage ? (
-        <div className="flex items-center ">
-          {page <= 1 ? (
-            <div />
-          ) : (
-            <div className="mr-2 mt-5 mb-3 flex text-white items-center justify-center w-[fit-content] p-1 px-3 self-center rounded-sm border-white border hover:bg-white hover:text-black transition duration-300 cursor-pointer">
-              <button
-                className="outline-none focus:outline-none"
-                onClick={() => router.push(`/platform?page=${page - 1}`)}
-              >
-                Previous
-              </button>
-            </div>
-          )}
 
+      <div className="flex items-center ">
+        {page <= 1 ? (
+          <div />
+        ) : (
+          <div className="mr-2 mt-5 mb-3 flex text-white items-center justify-center w-[fit-content] p-1 px-3 self-center rounded-sm border-white border hover:bg-white hover:text-black transition duration-300 cursor-pointer">
+            <button
+              className="outline-none focus:outline-none"
+              onClick={() =>
+                router.push(`/top?page=${page - 1}&title=${urlTitle}`)
+              }
+            >
+              Previous
+            </button>
+          </div>
+        )}
+
+        {data["next"] == null ? (
+          <div></div>
+        ) : (
           <div className="mt-5 mb-3 flex text-white items-center justify-center w-[fit-content] p-1 px-3 self-center rounded-sm border-white border hover:bg-white hover:text-black transition duration-300 cursor-pointer outline-none ">
             <button
               className="outline-none focus:outline-none"
-              onClick={() => router.push(`/platforms?page=${page + 1}`)}
+              onClick={() =>
+                router.push(`/top?page=${page + 1}&title=${urlTitle}`)
+              }
             >
               Next
             </button>
           </div>
-        </div>
-      ) : (
-        <div></div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

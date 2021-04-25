@@ -1,21 +1,16 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import {
-  BellIcon,
-  ChatIcon,
-  CogIcon,
-  DotsHorizontalIcon,
-  LogoutIcon,
-  MenuIcon,
-  PlusIcon,
-  SearchIcon,
-  XIcon,
-} from "@heroicons/react/outline";
+import { MenuIcon, SearchIcon, XIcon } from "@heroicons/react/outline";
 
 export default function Header() {
   const router = useRouter();
 
   const [searchGame, setSearch] = useState("");
+
+  const removeMobNav = () => {
+    document.getElementById("mobileMenu").classList.remove("flex");
+    document.getElementById("mobileMenu").classList.add("hidden");
+  };
 
   return (
     <div className="flex pt-6 items-center">
@@ -23,9 +18,9 @@ export default function Header() {
         G H O S T
       </h3>
       <div className="flex flex-1 bg-black h-10 rounded-full items-center hover:bg-gray-900 cursor-text transition duration-200">
-        <SearchIcon className="h-5 w-5 mr-1 text-[#484848]" />
+        <SearchIcon className="h-5 w-5 mr-1 ml-3 text-[#484848]" />
         <form
-          className="w-[100%] h-10 hover:bg-gray-900"
+          className="w-[100%] h-10 hover:bg-gray-900 rounded-full"
           onSubmit={(e) => {
             if (searchGame != null || searchGame !== "") {
               e.preventDefault();
@@ -47,7 +42,7 @@ export default function Header() {
       </div>
       <div className="flex items-center md:hidden">
         <div className="flex items-center justify-center w-7 h-7 mx-3 rounded-full bg-purple-800 cursor-pointer text-white font-bold text-xs">
-          <h4>RS</h4>
+          <h4>DN</h4>
         </div>
         <MenuIcon
           onClick={() => {
@@ -68,49 +63,70 @@ export default function Header() {
             <div className="flex justify-around items-center mt-6">
               <h3 className="font-extrabold  text-white text-lg">G H O S T</h3>
               <XIcon
-                onClick={() => {
-                  document
-                    .getElementById("mobileMenu")
-                    .classList.remove("flex");
-                  document.getElementById("mobileMenu").classList.add("hidden");
-                }}
+                onClick={() => removeMobNav()}
                 className="h-8 w-8 text-white cursor-pointer"
               />
             </div>
             <div className="flex flex-col items-center justify-center ml-3 mt-8 gap-y-2">
-              <p className="cursor-pointer text-white text-2xl mb-3">Stores</p>
               <p
-                onClick={() => router.push("/genres")}
+                onClick={() => {
+                  router.push("/top?title=stores");
+                  removeMobNav();
+                }}
+                className="cursor-pointer text-white text-2xl mb-3"
+              >
+                Stores
+              </p>
+              <p
+                onClick={() => {
+                  router.push("/top?title=genres");
+                  removeMobNav();
+                }}
                 className="cursor-pointer text-white text-2xl mb-3"
               >
                 Genres
               </p>
               <p
-                onClick={() => router.push("/creators")}
+                onClick={() => {
+                  router.push("/top?title=creators");
+                  removeMobNav();
+                }}
                 className="cursor-pointer text-white text-2xl mb-3"
               >
                 Creators
               </p>
               <p
-                onClick={() => router.push("/tags")}
+                onClick={() => {
+                  router.push("/top?title=tags");
+                  removeMobNav();
+                }}
                 className="cursor-pointer text-white text-2xl mb-3"
               >
                 Tags
               </p>
               <p
-                onClick={() => router.push("/developers")}
+                onClick={() => {
+                  router.push("/top?title=developers");
+                  removeMobNav();
+                }}
                 className="cursor-pointer text-white text-2xl mb-3"
               >
                 Developers
               </p>
               <p
-                onClick={() => router.push("/publishers")}
+                onClick={() => {
+                  router.push("/top?title=publishers");
+                  removeMobNav();
+                }}
                 className="cursor-pointer text-white text-2xl mb-3"
               >
                 Publishers
               </p>
               <p
-                onClick={() => router.push("/platforms")}
+                onClick={() => {
+                  router.push("/top?title=platforms");
+                  removeMobNav();
+                }}
                 className="cursor-pointer text-white text-2xl mb-3 "
               >
                 Platforms
@@ -121,7 +137,7 @@ export default function Header() {
       </div>
       <div className="hidden items-center md:flex">
         <div className="flex items-center justify-center w-10 h-10 ml-3 rounded-full bg-purple-800 cursor-default text-white font-bold text-lg">
-          <h4>RS</h4>
+          <h4>DN</h4>
         </div>
       </div>
     </div>
