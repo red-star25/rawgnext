@@ -52,19 +52,19 @@ const GameDetails = ({ gamesList, id }) => {
                           return (
                             <div key={idx} className=" mr-4 text-white">
                               {platform["platform"]["name"] === "PC" ? (
-                                Controller.listOfSearchedGameSvg[0]["svg"]
+                                Controller.listOfSearchedGameSvg.windows
                               ) : platform["platform"]["name"] === "Xbox" ? (
-                                Controller.listOfSearchedGameSvg[1]["svg"]
+                                Controller.listOfSearchedGameSvg.xbox
                               ) : platform["platform"]["name"] ===
                                 "PlayStation" ? (
-                                Controller.listOfSearchedGameSvg[2]["svg"]
+                                Controller.listOfSearchedGameSvg.ps5
                               ) : platform["platform"]["name"] ===
                                 "Nintendo Switch" ? (
-                                Controller.listOfSearchedGameSvg[3]["svg"]
+                                Controller.listOfSearchedGameSvg.nintendo
                               ) : platform["platform"]["name"] === "iOS" ? (
-                                Controller.listOfSearchedGameSvg[4]["svg"]
+                                Controller.listOfSearchedGameSvg.ios
                               ) : platform["platform"]["name"] === "Android" ? (
-                                Controller.listOfSearchedGameSvg[5]["svg"]
+                                Controller.listOfSearchedGameSvg.android
                               ) : (
                                 <div />
                               )}

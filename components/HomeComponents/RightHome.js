@@ -61,12 +61,12 @@ export default function RightHome({ gamesData, page }) {
       <div
         className={`w-[100%] grid ${
           size.width >= 1024
-            ? "grid-cols-4"
+            ? "grid-cols-4 gap-x-3"
             : size.width >= 768
-            ? "grid-cols-3"
+            ? "grid-cols-3 gap-x-3 gap-y-2"
             : size.width >= 460
-            ? "grid-cols-2"
-            : "100%"
+            ? "grid-cols-2 gap-x-3"
+            : "grid-cols-1 gap-y-3"
         }`}
       >
         {gamesData["results"].map((games, index) => {
@@ -84,8 +84,8 @@ export default function RightHome({ gamesData, page }) {
                 <Image
                   className="rounded-xl"
                   src={games["background_image"]}
-                  width={400}
-                  height={150}
+                  width={size.width <= 460 ? 400 : 300}
+                  height={180}
                   quality={75}
                   objectFit="cover"
                 />
@@ -99,18 +99,18 @@ export default function RightHome({ gamesData, page }) {
                       return (
                         <div key={idx} className="mr-3 mt-3 text-white">
                           {platform["platform"]["name"] === "PC" ? (
-                            Controller.listOfPlatFormSvg[0]
+                            Controller.listOfSearchedGameSvg.windows
                           ) : platform["platform"]["name"] === "Xbox" ? (
-                            Controller.listOfPlatFormSvg[1]
+                            Controller.listOfSearchedGameSvg.xbox
                           ) : platform["platform"]["name"] === "PlayStation" ? (
-                            Controller.listOfPlatFormSvg[2]
+                            Controller.listOfSearchedGameSvg.ps5
                           ) : platform["platform"]["name"] ===
                             "Nintendo Switch" ? (
-                            Controller.listOfPlatFormSvg[3]
+                            Controller.listOfSearchedGameSvg.nintendo
                           ) : platform["platform"]["name"] === "iOS" ? (
-                            Controller.listOfPlatFormSvg[4]
+                            Controller.listOfSearchedGameSvg.ios
                           ) : platform["platform"]["name"] === "Android" ? (
-                            Controller.listOfPlatFormSvg[5]
+                            Controller.listOfSearchedGameSvg.android
                           ) : (
                             <div />
                           )}
@@ -121,7 +121,7 @@ export default function RightHome({ gamesData, page }) {
                     <div />
                   )}
                 </div>
-                <div>
+                <div className="flex items-center justify-between">
                   {games["metacritic"] != null ? (
                     <div
                       className={`${
@@ -216,6 +216,9 @@ export default function RightHome({ gamesData, page }) {
             </button>
           </div>
         )}
+      </div>
+      <div className=" flex items-stretch justify-center">
+        <p className="text-gray-700 text-xs">Made by Dhruv Nakum</p>
       </div>
     </div>
   );

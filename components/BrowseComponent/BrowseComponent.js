@@ -50,13 +50,12 @@ export default function BrowseComponent({ data, page, urlTitle }) {
 
   return (
     <div>
-      <div className="hidden md:block mb-5">
-        <h1 className=" text-white text-6xl font-bold ">{title}</h1>
-      </div>
-      <div className="flex flex-col mb-5 items-center justify-center md:hidden">
-        <h1 className=" text-white text-4xl font-bold ">{title}</h1>
+      {/* Title */}
+      <div className="flex flex-col mb-5 items-center justify-center md:flex-row md:items-start md:justify-start">
+        <h1 className=" text-white text-4xl font-bold md:text-6xl">{title}</h1>
       </div>
 
+      {/* List of BrowseCards */}
       <div
         className={`w-[100%] grid ${
           size.width >= 1024
@@ -100,6 +99,8 @@ export default function BrowseComponent({ data, page, urlTitle }) {
               key={index}
               className="cursor-pointer sm:w-[fit-content] h-[fit-content] rounded-xl pb-5 hover:scale-105 transform transition duration-200  m-1  "
             >
+              {/* Image */}
+
               {items["image_background"] != null ? (
                 <div className="bg-gradient-to-t from-[#212121] z-50">
                   <Image
@@ -116,13 +117,13 @@ export default function BrowseComponent({ data, page, urlTitle }) {
               )}
               <div className=" w-[100%]   absolute left-[50%] top-[50%] transform translate-x-[-50%] translate-y-[-50%] m-auto  flex items-center justify-center flex-col">
                 <p className="text-white text-xl font-bold">{items["name"]}</p>
-                <div className="mt-2 text-white">Follow</div>
+                <div className="mt-2"></div>
                 <div className="mt-2 w-[100%]">
                   <div className="flex justify-between mx-4 mb-4">
                     <p className="text-white text-xs font-bold">
                       Popular items
                     </p>
-                    <p className="text-[#626363] text-sm">
+                    <p className="text-gray-200 text-sm">
                       {items["games_count"]}
                     </p>
                   </div>
@@ -134,7 +135,7 @@ export default function BrowseComponent({ data, page, urlTitle }) {
                             <p className="text-white text-xs ">
                               {game["name"]}
                             </p>
-                            <p className="text-[#626363] text-sm">
+                            <p className="text-gray-200 text-sm font-bold">
                               {game["added"]}
                             </p>
                           </div>

@@ -20,7 +20,7 @@ export default function Header() {
       <div className="flex flex-1 bg-black h-10 rounded-full items-center hover:bg-gray-900 cursor-text transition duration-200">
         <SearchIcon className="h-5 w-5 mr-1 ml-3 text-[#484848]" />
         <form
-          className="w-[100%] h-10 hover:bg-gray-900 rounded-full"
+          className="w-[100%] h-10 hover:bg-gray-900 rounded-full pr-3"
           onSubmit={(e) => {
             if (searchGame != null || searchGame !== "") {
               e.preventDefault();

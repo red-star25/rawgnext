@@ -37,14 +37,14 @@ export default function LeftHome() {
         onClick={() => {
           router.push("/");
         }}
-        className="headings cursor-pointer hover:text-gray-400 transition duration-150"
+        className="headings hover:animate-pulse cursor-pointer hover:text-[#626363] transition duration-150"
       >
         Home
       </h1>
 
       <div className="flex-col">
         <div className="user__profile flex">
-          <h1 className="headings cursor-default hover:text-gray-400 transition duration-150">
+          <h1 className="headings cursor-default hover:text-[#626363] hover:animate-pulse transition duration-150">
             Dhruv25
           </h1>
           <div className="flex items-center justify-center w-9 h-9 ml-3 rounded-full bg-purple-800 text-white font-bold text-lg">
@@ -61,9 +61,9 @@ export default function LeftHome() {
 
               router.push(`/?date=${finalDate}`);
             }}
-            className="flex pb-4 cursor-pointer"
+            className="flex pb-4 cursor-pointer group"
           >
-            <StarIcon className="h-6 w-6 text-white" />
+            <StarIcon className="h-6 w-6 text-white group-hover:animate-bounce" />
             <h4 className="subheadings pl-3">Last 30 days</h4>
           </div>
           <div
@@ -71,9 +71,9 @@ export default function LeftHome() {
               var finalDate = getDate(7, { isNext: false });
               router.push(`/?page=1&date=${finalDate}`);
             }}
-            className="flex pb-4 cursor-pointer"
+            className="flex pb-4 cursor-pointer group"
           >
-            <FireIcon className="h-6 w-6 text-white" />
+            <FireIcon className="h-6 w-6 text-white group-hover:animate-bounce" />
             <h4 className="subheadings pl-3">This week</h4>
           </div>
         </div>
@@ -85,36 +85,36 @@ export default function LeftHome() {
             onClick={() => {
               router.push("/top?title=developers");
             }}
-            className="flex pb-4 cursor-pointer"
+            className="flex pb-4 cursor-pointer group"
           >
-            <ChevronDoubleRightIcon className="h-6 w-6 text-white" />
+            <ChevronDoubleRightIcon className="h-6 w-6 text-white group-hover:animate-pulse" />
             <h4 className="subheadings pl-3">Developers</h4>
           </div>
           <div
             onClick={() => {
               router.push("/top?title=creators");
             }}
-            className="flex pb-4 cursor-pointer"
+            className="flex pb-4 cursor-pointer group"
           >
-            <ChevronDoubleRightIcon className="h-6 w-6 text-white" />
+            <ChevronDoubleRightIcon className="h-6 w-6 text-white group-hover:animate-pulse" />
             <h4 className="subheadings pl-3">Creators</h4>
           </div>
           <div
             onClick={() => {
               router.push("/top?title=tags");
             }}
-            className="flex pb-4 cursor-pointer"
+            className="flex pb-4 cursor-pointer group"
           >
-            <ChevronDoubleRightIcon className="h-6 w-6 text-white" />
+            <ChevronDoubleRightIcon className="h-6 w-6 text-white group-hover:animate-pulse" />
             <h4 className="subheadings pl-3">Tags</h4>
           </div>
           <div
             onClick={() => {
               router.push("/top/?title=publishers");
             }}
-            className="flex pb-4 cursor-pointer"
+            className="flex pb-4 cursor-pointer group"
           >
-            <ChevronDoubleRightIcon className="h-6 w-6 text-white" />
+            <ChevronDoubleRightIcon className="h-6 w-6 text-white group-hover:animate-pulse" />
             <h4 className="subheadings pl-3">Publishers</h4>
           </div>
         </div>
@@ -134,16 +134,16 @@ export default function LeftHome() {
             onClick={() => {
               router.push("/top/?title=platforms");
             }}
-            className="flex pb-4 cursor-pointer"
+            className="flex pb-4 cursor-pointer group"
           >
             {Controller.listOfSVG.platformGamePad}
-            <h4 className="subheadings pl-3">Platforms</h4>
+            <h4 className="subheadings pl-3 ">Platforms</h4>
           </div>
           <div
             onClick={() => {
               router.push("/top/?title=stores");
             }}
-            className="flex pb-4 cursor-pointer"
+            className="flex pb-4 cursor-pointer group"
           >
             {Controller.listOfSVG.platformStores}
             <h4 className="subheadings pl-3">Stores</h4>
@@ -155,21 +155,21 @@ export default function LeftHome() {
         <div className="user__sublist__menu pl-3">
           <div
             onClick={() => router.push("/?platforms=3&urlTitle=PC")}
-            className="flex pb-4 cursor-pointer"
+            className="flex pb-4 cursor-pointer group"
           >
-            <DesktopComputerIcon className="h-6 w-6 text-white" />
+            <DesktopComputerIcon className="h-6 w-6 text-white group-hover:animate-bounce" />
             <h4 className="subheadings pl-3">PC</h4>
           </div>
           <div
             onClick={() => router.push("/?platforms=1&urlTitle=PC")}
-            className="flex pb-4 cursor-pointer"
+            className="flex pb-4 cursor-pointer group"
           >
             {Controller.listOfSVG.playStation}
             <h4 className="subheadings pl-3">PlayStation4</h4>
           </div>
           <div
             onClick={() => router.push("/?platforms=4&urlTitle=PC")}
-            className="flex pb-3 cursor-pointer"
+            className="flex pb-3 cursor-pointer group"
           >
             {Controller.listOfSVG.xbox}
             <h4 className="subheadings pl-3">Xbox One</h4>
