@@ -495,8 +495,12 @@ export default function RightHome({ gamesData, page }) {
                   <p className="text-white text-xm">{games["playtime"]}</p>
                 </div>
                 <div className="flex justify-between items-center pb-2">
-                  <p className="text-gray-500 text-sm">Rating</p>
-                  <p className="text-white text-xm">{games["rating"]}</p>
+                  <p className="text-gray-500 text-sm">Reviews</p>
+                  <p className="text-white text-xs">{games["reviews_count"]}</p>
+                </div>
+                <div className="flex justify-between items-center pb-2">
+                  <p className="text-gray-500 text-sm">Metacritics</p>
+                  <p className="text-white text-xs">{games["metacritic"]}</p>
                 </div>
               </div>
             </div>

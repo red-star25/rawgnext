@@ -397,7 +397,7 @@ const GameDetails = ({ gamesList, id }) => {
                     {selectedGameData["name"]}
                   </div>
                   <div className="flex flex-col mt-12 md:flex-row">
-                    <div className="bg-[#161819] h-14 rounded-lg flex-1 flex items-center justify-between p-3 md:justify-around md:p-0">
+                    <div className="bg-[#161819] h-14 rounded-lg mb-2 flex-1 flex items-center justify-between p-3 md:justify-around md:p-0">
                       <div>
                         <p className="text-[#626363] text-xs mb-1">Add to</p>
                         <div className="flex">
@@ -413,7 +413,7 @@ const GameDetails = ({ gamesList, id }) => {
                         {listOfSVG.gameAdd}
                       </div>
                     </div>
-                    <div className="bg-[#161819] h-14 rounded-lg flex-1 flex items-center justify-between p-3 md:justify-around md:p-0 md:mx-3">
+                    <div className="bg-[#161819] h-14 rounded-lg mb-2 flex-1 flex items-center justify-between p-3 md:justify-around md:p-0 md:mx-3">
                       <div>
                         <p className="text-[#626363] text-xs mb-1">Add to</p>
                         <div className="flex">
@@ -429,7 +429,7 @@ const GameDetails = ({ gamesList, id }) => {
                         {listOfSVG.star}
                       </div>
                     </div>
-                    <div className="bg-[#161819] h-14 rounded-lg flex-1 flex items-center justify-between p-3 md:justify-around md:p-0 md:mx-3">
+                    <div className="bg-[#161819] h-14 rounded-lg mb-2 flex-1 flex items-center justify-between p-3 md:justify-around md:p-0 md:mx-3">
                       <div>
                         <p className="text-[#626363] text-xs mb-1">Save to</p>
 
