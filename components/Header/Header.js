@@ -14,7 +14,13 @@ export default function Header() {
 
   return (
     <div className="flex pt-6 items-center">
-      <h3 className="font-extrabold pr-10 ml-4 text-white text-lg">
+      <h3
+        onClick={() => {
+          router.push("/");
+          removeMobNav();
+        }}
+        className="font-extrabold cursor-pointer pr-10 ml-4 text-white text-lg"
+      >
         G H O S T
       </h3>
       <div className="flex flex-1 bg-black h-10 rounded-full items-center hover:bg-gray-900 cursor-text transition duration-200">
@@ -61,7 +67,15 @@ export default function Header() {
         >
           <div className="w-[60%] h-[100%] bg-[#181A1B] rounded-t-3xl flex flex-col overflow-y-scroll scrollbar-hide mb-2">
             <div className="flex justify-around items-center mt-6">
-              <h3 className="font-extrabold  text-white text-lg">G H O S T</h3>
+              <h3
+                onClick={() => {
+                  router.push("/");
+                  removeMobNav();
+                }}
+                className="font-extrabold cursor-pointer text-white text-lg"
+              >
+                G H O S T
+              </h3>
               <XIcon
                 onClick={() => removeMobNav()}
                 className="h-8 w-8 text-white cursor-pointer"
