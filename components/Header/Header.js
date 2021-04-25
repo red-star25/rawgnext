@@ -46,7 +46,7 @@ export default function Header() {
           />
         </form>
       </div>
-      <div className="flex items-center md:hidden">
+      <div className="flex items-center lg:hidden">
         <div className="flex items-center justify-center w-7 h-7 mx-3 rounded-full bg-purple-800 cursor-pointer text-white font-bold text-xs">
           <h4>DN</h4>
         </div>
@@ -59,7 +59,7 @@ export default function Header() {
               document.getElementById("mobileMenu").classList.add("flex");
             }
           }}
-          className="h-6 w-6 text-white md:hidden cursor-pointer"
+          className="h-6 w-6 text-white lg:hidden cursor-pointer"
         />
         <div
           id="mobileMenu"
@@ -149,7 +149,7 @@ export default function Header() {
           </div>
         </div>
       </div>
-      <div className="hidden items-center md:flex">
+      <div className="hidden items-center lg:flex">
         <div className="flex items-center justify-center w-10 h-10 ml-3 rounded-full bg-purple-800 cursor-default text-white font-bold text-lg">
           <h4>DN</h4>
         </div>
